@@ -1,0 +1,196 @@
+.slider-main-wrap {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 110;
+  background: rgba(0, 0, 0, 0.7);
+}
+.slider-main {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 75%;
+  z-index: 110;
+}
+.slider-main .slider-main__img-wrapper img {
+  border-radius: 10px;
+  box-shadow: 0 0 6px 4px rgba(255, 255, 255, 0.5)
+}
+.slider-main .slider-main__img-wrapper {
+  padding: 12px;
+}
+.slider-main .slick-arrow {
+  display: none !important;
+}
+/* // slider BG */
+.slider-bg,
+.slider-bg div {
+  height: 100%;
+  width: 100%;
+}
+.slider-bg {
+  overflow: hidden;
+  z-index: 100;
+}
+.slider-bg__img-wrapper img {
+  height: 100%;
+}
+
+/* //   slider NAV */
+.slider-nav {
+  position: fixed;
+  z-index: 120;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  height: 120px;
+  background: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.6);
+  transition: 0.5s;
+}
+.slider-nav .slick-slider {
+  overflow: hidden;
+}
+.slider-nav .slick-current .slider-bg__img {
+  border: 2px solid white;
+  transform: scale(1);
+}
+.slider-nav .slick-slide div {
+  padding: 0;
+}
+.slider-nav .slider-bg__img {
+  width: 100%;
+  height: 120px;
+  transform: scale(0.8);
+}
+.slider-nav .slick-arrow {
+  height: 100%;
+  width: 30px;
+  background: rgba(0, 0, 0, 0.5);
+}
+.slider-nav .slick-prev {
+  left: 0;
+  z-index: 120;
+}
+.slider-nav .slick-next {
+  right: 0;
+  z-index: 120;
+}
+.slider-nav .slider-nav-control {
+  display: inline-block;
+  width: 100px;
+  border: none;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 0 10px 6px;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 19px;
+  border-left: 3px solid rgba(0, 0, 0, 0.5);
+  border-right: 3px solid rgba(0, 0, 0, 0.5);
+  text-transform: uppercase;
+  transition: .4s;
+  outline: none;
+}
+.slider-nav .slider-nav-control:hover {
+  border-left: 3px solid rgba(0, 0, 0, 0.7);
+  border-right: 3px solid rgba(0, 0, 0, 0.7);
+  background: rgba(0, 0, 0, 0.6);
+  color: rgba(255, 255, 255, 0.9);
+}
+.slider-nav .slider-nav-control:active {
+  box-shadow: 0 0 3px 1px rgba(255, 255, 255, 0.7) inset;
+  background: rgba(0, 0, 0, 0.4);
+}
+.slider-settings {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  height: 24px;
+  left: 0;
+  top: -28px;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 5px 1px rgba(255, 255, 255, 0.7) inset;
+  z-index: 120;
+  text-align: center;
+  transition: 0.4s;
+}
+.slider-settings:hover {
+  background: rgba(255, 255, 255, 0.4);
+  box-shadow: 0 0 5px 1px rgba(255, 255, 255, 0.8) inset;
+}
+.slider-settings .btn {
+  display: block;
+  width: 120px;
+  height: 100%;
+  padding: 4px 5px 2px;
+  background: rgba(0, 0, 0, 0.5);
+  border: none;
+  outline: none;
+  border-left: 1px solid rgba(0, 0, 0, 0.5);
+  border-right: 1px solid rgba(0, 0, 0, 0.5);
+  color: rgba(255, 255, 255, 0.8);
+  text-transform: uppercase;
+  transition: 0.4s;
+}
+.slider-settings .btn:hover {
+  background: rgba(0, 0, 0, 0.8);
+  border-color: rgba(255, 255, 255, 0.6);
+}
+/* //  Settings Menu */
+.settings-menu {
+  position: fixed;
+  top: 0;
+  right: -29px;
+  height: 100%;
+  z-index: 140;
+  color: rgba(255, 255, 255, 0.8);
+  background: rgba(0, 0, 0, 0.6);
+  padding: 10px;
+  padding-right: 20px;
+  transition: 0.4s;
+}
+.settings-menu__header {
+  text-transform: uppercase;
+  text-align: center;
+}
+.settings-menu__quantity-slides label,
+.settings-menu__site-bg label, .settings-menu__auto-play label {
+  display: block;
+}
+.settings-menu__quantity-slides,
+.settings-menu__site-bg {
+  padding: 10px 0;
+  margin-bottom: 15px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.8);
+}
+.settings-menu__close {
+  position: absolute;
+  left: -41px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 30px;
+  padding: 0 12px;
+  background: rgba(0, 0, 0, 0.6);
+  cursor: pointer;
+  transition: 0.4s;
+  border-top-left-radius: 50%;
+  border-bottom-left-radius: 50%;
+}
+.settings-menu__close:hover {
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+}
+/* //  dinemic classes */
+.hide {
+  height: 0 !important;
+}
+
+@media screen and (max-width: 768px) {
+  .slider-main {
+    width: 100%;
+  }
+}
