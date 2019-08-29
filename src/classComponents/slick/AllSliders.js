@@ -14,6 +14,8 @@ export default class AsNavFor extends Component {
             nav1: null,
             nav2: null,
             nav3: null,
+            navSlider: true,
+            slideIndex: 1,
             sliderNavSet: {
                 open: true
             }
@@ -34,7 +36,6 @@ export default class AsNavFor extends Component {
         });
     }
     componentDidUpdate(prevProps) {
-        // Популярный пример (не забудьте сравнить пропсы):
         if (this.props.sliderNav.autoPlay !== prevProps.sliderNav.autoPlay) {
             this.props.sliderNav.autoPlay ? this.play() : this.pause();
         }
@@ -47,19 +48,11 @@ export default class AsNavFor extends Component {
     }
     next() {
         this.slider2.slickNext();
-      }
-      previous() {
+    }
+    previous() {
         this.slider2.slickPrev();
-      }
+    }
     render() {
-        const settings = {
-            // dots: true,
-            infinite: true,
-            slidesToShow: 1,
-            slidesToScroll: 1,
-            fade: true
-            // lazyLoad: 'progressively'
-        };
         const allImgBg = this.props.imgSrc.map((src, index) => {
             return <SliderImgBg src={src} key={index} />
         });
@@ -68,44 +61,53 @@ export default class AsNavFor extends Component {
         });
         return (
             <React.Fragment>
+                {/* background slider */}
                 <Slider
-                    {...settings}
-                     asNavFor={this.state.nav3}
+                    asNavFor={this.state.nav2}
                     ref={slider => (this.slider1 = slider)}
                     className={'slider-bg'}
-                    // lazyLoad={'progressively'}
+                    fade={true}
                 >
                     {allImgBg}
                 </Slider>
-                <div className={this.state.sliderNavSet.open ? "slider-nav" : "slider-nav hide"} onClick={this.props.onClick}>
+                {/* NAV SLIDER */}
+                <div className={this.state.sliderNavSet.open ? "slider-nav" : "slider-nav hide"} >
                     <SliderNavSettings>
-                        <button className="slider-nav-control" style={this.state.sliderNavSet.open ? {marginRight: "1000px", opacity: 0} : {marginRight: "10px", opacity: 1}} onClick={this.previous}>&larr;</button>
+                        <button className="slider-nav-control" style={this.state.sliderNavSet.open ? { marginRight: "1000px", opacity: 0 } : { marginRight: "10px", opacity: 1 }} onClick={this.previous}>&larr;</button>
                         <button onClick={this.toggleSliderNav} className="btn">{this.state.sliderNavSet.open ? "закрыть" : "открыть"}</button>
-                        <button className="slider-nav-control" style={this.state.sliderNavSet.open ? {marginLeft: "1000px", opacity: 0} : {marginLeft: "10px", opacity: 1}} onClick={this.next}>&rarr;</button>
+                        <button className="slider-nav-control" style={this.state.sliderNavSet.open ? { marginLeft: "1000px", opacity: 0 } : { marginLeft: "10px", opacity: 1 }} onClick={this.next}>&rarr;</button>
                     </SliderNavSettings>
                     <Slider
-                        asNavFor={this.state.nav2}
-                        ref={slider => (this.slider3 = slider)}
+                        asNavFor={this.state.nav3}
+                        ref={slider => (this.slider2 = slider)}
                         slidesToShow={this.props.sliderNav.quantitySlides}
                         swipeToSlide={true}
                         focusOnSelect={true}
                         centerMode={true}
                         centerPadding={'0px'}
                         autoplay={true}
+                        pauseOnHover={true}
+                        speed={800}
                         // lazyLoad={'progressively'}
                         autoplaySpeed={this.props.sliderNav.playSpeed}
                         className={this.state.sliderNavSet.open ? "" : "hide"}
+                        afterChange={(current) => {
+                            this.props.slideIndex(current + 1);
+                            this.setState({slideIndex: (current + 1)});
+                            }
+                        }
                     >
                         {allImgBg}
                     </Slider>
                 </div>
+                {/* MAIN SLIDER */}
                 <div className="slider-main-wrap" style={{ background: this.props.sliderNav.siteBg }} onClick={this.props.onClick}>
                     <Slider
-                        {...settings}
                         asNavFor={this.state.nav1}
-                        ref={slider => (this.slider2 = slider)}
+                        ref={slider => (this.slider3 = slider)}
                         className={'slider-main'}
                         adaptiveHeight={true}
+                        fade={true}
                     >
                         {allImg}
                     </Slider>
