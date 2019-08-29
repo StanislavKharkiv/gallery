@@ -126,6 +126,7 @@
   display: block;
   width: 120px;
   height: 100%;
+  flex-shrink: 0;
   padding: 4px 5px 2px;
   background: rgba(0, 0, 0, 0.5);
   border: none;

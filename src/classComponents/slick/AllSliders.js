@@ -58,6 +58,7 @@ export default class AsNavFor extends Component {
             slidesToShow: 1,
             slidesToScroll: 1,
             fade: true
+            // lazyLoad: 'progressively'
         };
         const allImgBg = this.props.imgSrc.map((src, index) => {
             return <SliderImgBg src={src} key={index} />
@@ -69,9 +70,10 @@ export default class AsNavFor extends Component {
             <React.Fragment>
                 <Slider
                     {...settings}
-                    asNavFor={this.state.nav3}
+                     asNavFor={this.state.nav3}
                     ref={slider => (this.slider1 = slider)}
                     className={'slider-bg'}
+                    // lazyLoad={'progressively'}
                 >
                     {allImgBg}
                 </Slider>
@@ -82,14 +84,15 @@ export default class AsNavFor extends Component {
                         <button className="slider-nav-control" style={this.state.sliderNavSet.open ? {marginLeft: "1000px", opacity: 0} : {marginLeft: "10px", opacity: 1}} onClick={this.next}>&rarr;</button>
                     </SliderNavSettings>
                     <Slider
-                        asNavFor={this.state.nav1}
-                        ref={slider => (this.slider2 = slider)}
+                        asNavFor={this.state.nav2}
+                        ref={slider => (this.slider3 = slider)}
                         slidesToShow={this.props.sliderNav.quantitySlides}
                         swipeToSlide={true}
                         focusOnSelect={true}
                         centerMode={true}
                         centerPadding={'0px'}
                         autoplay={true}
+                        // lazyLoad={'progressively'}
                         autoplaySpeed={this.props.sliderNav.playSpeed}
                         className={this.state.sliderNavSet.open ? "" : "hide"}
                     >
@@ -99,8 +102,8 @@ export default class AsNavFor extends Component {
                 <div className="slider-main-wrap" style={{ background: this.props.sliderNav.siteBg }} onClick={this.props.onClick}>
                     <Slider
                         {...settings}
-                        asNavFor={this.state.nav2}
-                        ref={slider => (this.slider3 = slider)}
+                        asNavFor={this.state.nav1}
+                        ref={slider => (this.slider2 = slider)}
                         className={'slider-main'}
                         adaptiveHeight={true}
                     >

@@ -3,16 +3,37 @@ import { SettingsMenuOpenContext } from './SettingsMenuContext';
 import AllSliders from './slick/AllSliders';
 import './main.css';
 import SettingsMenu from '../functionComponents/SettingsMenu';
-const allImgSrc = ["/img/car1.jpg", "/img/car2.jpg", "/img/car3.jpg", "/img/car4.jpg", "/img/car5.jpg", "/img/car6.jpg", "/img/car7.jpg", "/img/car8.jpg", "/img/car9.jpg", "/img/car10.jpg", "https://cdn.pixabay.com/photo/2012/11/02/13/02/ford-63930_1280.jpg"]
+// static path from site
+let allImgSrc = ["/img/car1.jpg", "/img/car2.jpg", "/img/car3.jpg", "/img/car4.jpg", "/img/car5.jpg", "/img/car6.jpg", "/img/car7.jpg", "/img/car8.jpg", "/img/car9.jpg", "/img/car10.jpg", "https://cdn.pixabay.com/photo/2012/11/02/13/02/ford-63930_1280.jpg"];
+
 class App extends React.Component {
     state = {
         quantitySlides: 5,
         siteBg: "rgba(0, 0, 0, .7)",
         SettingsMenuOpen: false,
         autoPlay: true,
-        playSpeed: 5000
+        playSpeed: 5000,
+        loadSite: true
+    }
+    // get path from server in JSON format and parse it ***
+    getImgFromServer = (path) => {
+        let allImgSrc2 = [];
+        fetch(path)
+            .then(response => response.json())
+            .then(commits => {
+                console.log("JSON: ", commits);
+                for (let value of commits) {
+                    allImgSrc2.push(`${path}/img/${value}`);
+                }
+                //allImgSrc = allImgSrc2;
+            })
+            .then(() => {
+                console.log('callback')
+                this.setState({loadSite: true})
+            })
     }
 
+    // ***
     handlerQuantitySlides = (e) => {
         if (e.target.getAttribute('name') === 'quantity-slides')
             this.setState({ quantitySlides: parseInt(e.target.getAttribute('value'), 10) })
@@ -27,15 +48,19 @@ class App extends React.Component {
     }
     handlerSettingsMenuOpen = (e) => {
         let targetAttr = e.target.getAttribute("data-close");
-        if(targetAttr === null){
+        if (targetAttr === null) {
             this.setState({ SettingsMenuOpen: false });
-        }else{
+        } else {
             this.setState({ SettingsMenuOpen: !this.state.SettingsMenuOpen });
-        } 
+        }
     }
     handlerSliderSpeed = (e) => {
-       let timeInMiliseconds = (+e.target.value) * 1000;
-       this.setState({playSpeed: timeInMiliseconds});
+        let timeInMiliseconds = (+e.target.value) * 1000;
+        this.setState({ playSpeed: timeInMiliseconds });
+    }
+    componentDidMount() {
+        this.getImgFromServer("http://slider");
+        console.log('App mount')
     }
     render() {
         return (
@@ -59,7 +84,7 @@ class App extends React.Component {
                         </div>
                         <span className="settings-menu__close" onClick={this.handlerSettingsMenuOpen} data-close="true">{this.state.SettingsMenuOpen ? <span data-close="true">&times;</span> : <span data-close="true">&#9776; </span>}</span>
                     </SettingsMenu>
-                    <AllSliders imgSrc={allImgSrc} sliderNav={this.state} onClick={this.handlerSettingsMenuOpen}/>
+                    {this.state.loadSite ? <AllSliders imgSrc={allImgSrc} sliderNav={this.state} onClick={this.handlerSettingsMenuOpen} /> : <h1>Loading...</h1>}
                 </SettingsMenuOpenContext.Provider>
             </div>
         )
