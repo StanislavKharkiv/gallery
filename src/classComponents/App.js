@@ -1,10 +1,12 @@
 import React from 'react';
 import { SettingsMenuOpenContext } from './SettingsMenuContext';
-import AllSliders from './slick/AllSliders';
+import AsNavFor from './slick/AllSliders';
+import GalleryInfo from '../functionComponents/GalleryInfo';
 import './main.css';
 import SettingsMenu from '../functionComponents/SettingsMenu';
 // static path from site
-let allImgSrc = ["/img/car1.jpg", "/img/car2.jpg", "/img/car3.jpg", "/img/car4.jpg", "/img/car5.jpg", "/img/car6.jpg", "/img/car7.jpg", "/img/car8.jpg", "/img/car9.jpg", "/img/car10.jpg", "https://cdn.pixabay.com/photo/2012/11/02/13/02/ford-63930_1280.jpg"];
+let allImgSrc;
+//["/img/car1.jpg", "/img/car2.jpg", "/img/car3.jpg", "/img/car4.jpg", "/img/car5.jpg", "/img/car6.jpg", "/img/car7.jpg", "/img/car8.jpg", "/img/car9.jpg", "/img/car10.jpg", "https://cdn.pixabay.com/photo/2012/11/02/13/02/ford-63930_1280.jpg"];
 
 class App extends React.Component {
     state = {
@@ -12,8 +14,9 @@ class App extends React.Component {
         siteBg: "rgba(0, 0, 0, .7)",
         SettingsMenuOpen: false,
         autoPlay: true,
-        playSpeed: 5000,
-        loadSite: true
+        playSpeed: 3000,
+        loadSite: false,
+        imgQuantity: 1
     }
     // get path from server in JSON format and parse it ***
     getImgFromServer = (path) => {
@@ -25,11 +28,11 @@ class App extends React.Component {
                 for (let value of commits) {
                     allImgSrc2.push(`${path}/img/${value}`);
                 }
-                //allImgSrc = allImgSrc2;
+                allImgSrc = allImgSrc2;
             })
             .then(() => {
-                console.log('callback')
-                this.setState({loadSite: true})
+                this.setState({loadSite: true, imgQuantity : allImgSrc.length});
+                console.log(this.state.imgQuantity)
             })
     }
 
@@ -60,11 +63,11 @@ class App extends React.Component {
     }
     componentDidMount() {
         this.getImgFromServer("http://slider");
-        console.log('App mount')
     }
     render() {
         return (
             <div className="wrapper">
+                <GalleryInfo imgQuantity={this.state.imgQuantity} />
                 <SettingsMenuOpenContext.Provider value={this.handlerSettingsMenuOpen} >
                     <SettingsMenu width={this.state.SettingsMenuOpen ? "35%" : "0%"} closeClick={this.handlerSettingsMenuOpen}>
                         <div className="settings-menu__quantity-slides" onClick={this.handlerQuantitySlides}>
@@ -84,7 +87,7 @@ class App extends React.Component {
                         </div>
                         <span className="settings-menu__close" onClick={this.handlerSettingsMenuOpen} data-close="true">{this.state.SettingsMenuOpen ? <span data-close="true">&times;</span> : <span data-close="true">&#9776; </span>}</span>
                     </SettingsMenu>
-                    {this.state.loadSite ? <AllSliders imgSrc={allImgSrc} sliderNav={this.state} onClick={this.handlerSettingsMenuOpen} /> : <h1>Loading...</h1>}
+                    {this.state.loadSite ? <AsNavFor imgSrc={allImgSrc} sliderNav={this.state} onClick={this.handlerSettingsMenuOpen} /> : <h1>Loading...</h1>}
                 </SettingsMenuOpenContext.Provider>
             </div>
         )
