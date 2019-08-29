@@ -11,14 +11,21 @@ body,
 }
 .gallery-info {
   color: white;
+<<<<<<< HEAD
   font-size: 1rem;
+=======
+  font-size: 28px;
+>>>>>>> 5fc8a04f39fb54d9ff120e893a2cda3176ab842c
   position: fixed;
   z-index: 150;
   left: 50%;
   transform: translateX(-50%);
+<<<<<<< HEAD
   padding: 2px 20px;
   background: rgba(0, 0, 0, .4);
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
   box-shadow: 0 1px 5px 1px rgba(255, 255, 255, 0.5);
+=======
+>>>>>>> 5fc8a04f39fb54d9ff120e893a2cda3176ab842c
 }

@@ -15,7 +15,10 @@ export default class AsNavFor extends Component {
             nav2: null,
             nav3: null,
             navSlider: true,
+<<<<<<< HEAD
             slideIndex: 1,
+=======
+>>>>>>> 5fc8a04f39fb54d9ff120e893a2cda3176ab842c
             sliderNavSet: {
                 open: true
             }
@@ -87,7 +90,11 @@ export default class AsNavFor extends Component {
                         centerPadding={'0px'}
                         autoplay={true}
                         pauseOnHover={true}
+<<<<<<< HEAD
                         speed={800}
+=======
+                        speed={900}
+>>>>>>> 5fc8a04f39fb54d9ff120e893a2cda3176ab842c
                         // lazyLoad={'progressively'}
                         autoplaySpeed={this.props.sliderNav.playSpeed}
                         className={this.state.sliderNavSet.open ? "" : "hide"}
