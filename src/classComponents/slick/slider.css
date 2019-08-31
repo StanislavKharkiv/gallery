@@ -149,50 +149,7 @@
   background: rgba(0, 0, 0, 0.8);
   border-color: rgba(255, 255, 255, 0.6);
 }
-/* //  Settings Menu */
-.settings-menu {
-  position: fixed;
-  top: 0;
-  right: -29px;
-  height: 100%;
-  z-index: 140;
-  color: rgba(255, 255, 255, 0.8);
-  background: rgba(0, 0, 0, 0.6);
-  padding: 10px;
-  padding-right: 20px;
-  transition: 0.4s;
-}
-.settings-menu__header {
-  text-transform: uppercase;
-  text-align: center;
-}
-.settings-menu__quantity-slides label,
-.settings-menu__site-bg label, .settings-menu__auto-play label {
-  display: block;
-}
-.settings-menu__quantity-slides,
-.settings-menu__site-bg {
-  padding: 10px 0;
-  margin-bottom: 15px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.8);
-}
-.settings-menu__close {
-  position: absolute;
-  left: -41px;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 30px;
-  padding: 0 12px;
-  background: rgba(0, 0, 0, 0.6);
-  cursor: pointer;
-  transition: 0.4s;
-  border-top-left-radius: 50%;
-  border-bottom-left-radius: 50%;
-}
-.settings-menu__close:hover {
-  background: rgba(0, 0, 0, 0.8);
-  color: white;
-}
+
 /* //  dinemic classes */
 .hide {
   height: 0 !important;
